@@ -7,21 +7,50 @@ var _ = {};
 // Returns an array with the first n elements of an array.
 // If n is not provided it returns an array with just the first element.
 _.first = function (array, n) {
+  if (!array || !array.hasOwnProperty('length')) {
+    return [];
+  }
 
+  if (n && n > 0) {
+    var newArray = Array.prototype.slice.call(array);
+    return newArray.slice(0, n);
+  }
+
+  return [array[0]];
 };
 
 // _.last(array, [n])
 // Returns an array with the last n elements of an array.
 // If n is not provided it returns an array with just the last element.
 _.last = function (array, n) {
+  if (!array || !array.hasOwnProperty('length')) {
+    return [];
+  }
 
+  if (n && n > 0) {
+    var newArray = Array.prototype.slice.call(array);
+    return newArray.slice(-n);
+  }
+
+  return [array[array.length - 1]];
 };
 
 // _.uniq(array)
 // Produces a duplicate-free version of the array, using === to test equality.
 // In particular only the first occurence of each value is kept.
 _.uniq = function (array) {
+  var uniqueArray = [];
 
+  if (array.length > 0) {
+    for (var i = 0; i < array.length; i++) {
+      var value = array[i];
+      if (uniqueArray.indexOf(value) === -1) {
+        uniqueArray.push(value);
+      }
+    }
+  }
+
+  return uniqueArray;
 };
 
 // OBJECTS
@@ -31,6 +60,8 @@ _.uniq = function (array) {
 // to the destination object, and returns it (without using `Object.assign`).
 _.extend = function (destination, source) {
 
+
+  return destination;
 };
 
 // _.defaults(destination, source)
@@ -39,6 +70,8 @@ _.extend = function (destination, source) {
 // and returns the destination object.
 _.defaults = function (destination, source) {
 
+
+  return destination;
 };
 
 // COLLECTIONS
@@ -49,7 +82,21 @@ _.defaults = function (destination, source) {
 // (element, index|key, collection), and bound to the context if one is passed.
 // Returns the collection for chaining.
 _.each = function (collection, iteratee, context) {
+  var boundIteratee = iteratee.bind(context);
 
+  if (Array.isArray(collection)) {
+    for (var i = 0; i < collection.length; i++) {
+      boundIteratee(collection[i], i, collection);
+    }
+  } else {
+    for (var key in collection) {
+      if (collection.hasOwnProperty(key)) {
+        boundIteratee(collection[key], key, collection);
+      }
+    }
+  }
+
+  return collection;
 };
 
 // _.contains(collection, value)
@@ -126,7 +173,13 @@ _.some = function (collection, predicate, context) {
 // indicated by methodName on each value in the collection.
 // Any extra arguments passed to invoke will be forwarded on to the method invocation.
 _.invoke = function (collection, methodName) {
+  var result = [];
 
+  // for (let index = 0; index < collection.length; index++) {
+    
+  // }
+
+  return result;
 };
 
 // _.pluck(collection, propertyName)
@@ -146,7 +199,16 @@ _.pluck = function (collection, propertyName) {
 // returning the value from the original call. Useful for initialization functions,
 // instead of having to set a boolean flag and then check it later.
 _.once = function (func) {
+  var ran = false;
+  var result;
 
+  return function () {
+    if (ran) return result;
+
+    ran = true;
+    result = func.apply(this, arguments);
+    return result;
+  };
 };
 
 // _.memoize(func)
@@ -165,7 +227,11 @@ _.memoize = function (func) {
 // If you pass the optional arguments, they will be forwarded
 // on to the function when it is invoked.
 _.delay = function (func, wait) {
+  var argsArray = Array.prototype.slice.call(arguments, 2);  //create array of 3rd, 4th, nth elements
 
+  return setTimeout(function () {
+    return func.apply(null, argsArray);
+  }, wait);
 };
 
 // _.throttle(function, wait)
@@ -175,7 +241,16 @@ _.delay = function (func, wait) {
 // just return the last computed result. Useful for rate-limiting
 // events that occur faster than you can keep up with.
 _.throttle = function (func, wait) {
+  var previousRun, result;
 
+  return function () {
+    var elapsedSinceRun = Date.now() - previousRun;
+    if (elapsedSinceRun < wait) return result;
+
+    previousRun = Date.now();
+    result = func.apply(this, arguments);
+    return result;
+  };
 };
 
 // Allow tests to run on the server (leave at the bottom)
