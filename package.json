@@ -1,0 +1,43 @@
+{
+  "name": "codeworks-pre-course",
+  "version": "2.1.0",
+  "description": "The Codeworks Full Stack Pre Course Curriculum",
+  "scripts": {
+    "precommit": "gulp lint",
+    "test": "mocha underline/test && mocha stringifier/test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "codeworksbcn/pre-course"
+  },
+  "author": "Codeworks",
+  "license": "UNLICENSED",
+  "private": true,
+  "devDependencies": {
+    "browser-sync": "^2.24.6",
+    "chai": "^4.1.2",
+    "cz-changelog": "^1.0.1",
+    "del": "^3.0.0",
+    "eslint": "^5.8.0",
+    "eslint-plugin-json": "^1.2.1",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^5.0.0",
+    "gulp-html-lint": "0.0.2",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-stylelint": "^7.0.0",
+    "husky": "^0.14.3",
+    "mocha": "^5.2.0",
+    "stylelint": "^9.4.0",
+    "stylelint-config-standard": "^18.2.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-changelog"
+    }
+  },
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "skeleton-css": "^2.0.4"
+  }
+}

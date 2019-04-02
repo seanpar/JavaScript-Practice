@@ -1,0 +1,17 @@
+{
+  "name": "stringifier",
+  "version": "1.0.0",
+  "description": "For this exercise you’ll be reimplementing [`JSON.stringify()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify).",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "grunt": "^1.0.3"
+  }
+}

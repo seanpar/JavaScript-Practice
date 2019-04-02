@@ -1,0 +1,10 @@
+[0, 'foo', function () {}, '', null, undefined]
+
+{
+  num: 0,
+  string: 'foo',
+  func: function () {},
+  emptyString: '',
+  null: null,
+  undefined: undefined
+}
